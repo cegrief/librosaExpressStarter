@@ -24,10 +24,27 @@
     
     app.get('/hello', foo);
 	*/
-
+var PythonShell = require('python-shell');
+	
 module.exports = function (app) {
 
     app.get('/hello', function(req,res){
         res.send('Hello World from services.js');
     });
+	
+	app.post('/helloForm', function(req,res){
+		res.send(req.body);
+	}); 
+
+	app.post('/helloPython', function(req,res){
+		var inp = req.files.file.path;
+		var options = {
+			args: [inp],
+			scriptPath: 'public/scripts/',
+			pythonOptions: ['-W ignore']
+		};
+		PythonShell.run('reverseAudio.py', options, function(err, results){
+			res.send({path:results[0]});
+		});
+	});
 };

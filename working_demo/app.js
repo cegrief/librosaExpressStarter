@@ -18,6 +18,8 @@ var bodyParser = require('body-parser'); //express middle-ware. Loads all the da
 										// to the server into request.body. This makes 
 										// life easier.
 
+var multer = require('multer');
+										
 // STEP 2: CREATE AN EXPRESS INSTANCE										 
 var app = express();	// This makes a new express instance
 
@@ -34,6 +36,10 @@ app.use(bodyParser.json());									// This parses the data the client sends to 
 															// puts it in req.body. You don't need this if you're
 															// just doing a client-side app.
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(multer({dest:'./public/uploads/'}));
+															
 // STEP 4: SET THE PORT TO LISTEN ON
 app.set('port', 5000);  // 5000 isn't a standard port. I just didn't want it to be a 
 						// low-numbered one. Eventually we'll be forwarding port 80
