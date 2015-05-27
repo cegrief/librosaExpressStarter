@@ -29,7 +29,7 @@ var app = express();	// This makes a new express instance
 
 app.use(express.static(path.join(__dirname, 'views')));  	//	This serves a static file to the browser. 
 															// This serves the HTML in the folder "views" to the client
-app.use('/public', express.static(__dirname + 'public'));	// This serves static files out of the /public folder.
+app.use('/public', express.static(__dirname + '/public/'));	// This serves static files out of the /public folder.
 app.use(bodyParser.json());									// This parses the data the client sends to the server and 
 															// puts it in req.body. You don't need this if you're
 															// just doing a client-side app.
